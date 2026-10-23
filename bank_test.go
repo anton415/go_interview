@@ -26,7 +26,6 @@ func TestDeposit(t *testing.T) {
 			account := &Account{Balance: 10}
 			err := account.Deposit(tt.amount)
 
-			// require.NoError()
 			assert.Equal(t, tt.expected, account.Balance, "balance after amount %d", tt.amount)
 			assert.Equal(t, tt.wantErr, err != nil, "Deposit(%d) error = %v; wantErr = %t", tt.amount, err, tt.wantErr)
 		})
