@@ -3,6 +3,8 @@ package main
 import (
 	"strconv"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDeposit(t *testing.T) {
@@ -23,14 +25,10 @@ func TestDeposit(t *testing.T) {
 		t.Run(strconv.FormatInt(tt.amount, 10), func(t *testing.T) {
 			account := &Account{Balance: 10}
 			err := account.Deposit(tt.amount)
-			if account.Balance != tt.expected {
-				t.Errorf("balance after amount %d = %d; want %d",
-					tt.amount, account.Balance, tt.expected)
-			}
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Deposit(%d) error = %v; wantErr = %t",
-					tt.amount, err, tt.wantErr)
-			}
+
+			// require.NoError()
+			assert.Equal(t, tt.expected, account.Balance, "balance after amount %d", tt.amount)
+			assert.Equal(t, tt.wantErr, err != nil, "Deposit(%d) error = %v; wantErr = %t", tt.amount, err, tt.wantErr)
 		})
 	}
 }
@@ -53,14 +51,8 @@ func TestWithdraw(t *testing.T) {
 		t.Run(strconv.FormatInt(tt.amount, 10), func(t *testing.T) {
 			account := &Account{Balance: 10}
 			err := account.Withdraw(tt.amount)
-			if account.Balance != tt.expected {
-				t.Errorf("balance after amount %d = %d; want %d",
-					tt.amount, account.Balance, tt.expected)
-			}
-			if (err != nil) != tt.wantErr {
-				t.Errorf("Withdraw(%d) error = %v; wantErr = %t",
-					tt.amount, err, tt.wantErr)
-			}
+			assert.Equal(t, tt.expected, account.Balance, "balance after amount %d", tt.amount)
+			assert.Equal(t, tt.wantErr, err != nil, "Withdraw(%d) error = %v; wantErr = %t", tt.amount, err, tt.wantErr)
 		})
 	}
 }
