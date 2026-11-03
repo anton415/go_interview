@@ -44,3 +44,23 @@ func TestKeepPositive(t *testing.T) {
 		})
 	}
 }
+
+func TestColapseString(t *testing.T) {
+	tests := []struct {
+		name     string
+		input    string
+		expected string
+	}{
+		{"collapse 'aaafbbbb'", "aaafbbbb", "a3fb4"},
+		{"collapse 'a'", "a", "a"},
+		{"collapse 'aa'", "aa", "a2"},
+		{"empty string", "", ""},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			result := ColapseString(tt.input)
+			assert.Equal(t, tt.expected, result)
+		})
+	}
+}
