@@ -8,7 +8,10 @@ func Frequencies(words []string) map[string]int {
 	return counts
 }
 
-func MostFrequent(freq map[string]int) (word string, count int, ok bool) {
+func MostFrequent(freq map[string]int) (string, int, bool) {
+	var word string
+	var count int
+	var ok bool
 	for candidate, n := range freq {
 		if !ok {
 			word = candidate
