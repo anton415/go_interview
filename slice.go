@@ -1,5 +1,7 @@
 package main
 
+import "strings"
+
 func RemoveValue(items []int, value int) []int {
 	write := 0
 	for read := 0; read < len(items); read++ {
@@ -32,21 +34,22 @@ func ColapseString(s string) string {
 	if len(s) == 0 {
 		return ""
 	}
-	result := string(s[0])
+	var result strings.Builder
+	result.WriteByte(s[0])
 	count := 1
 	for i := 1; i < len(s); i++ {
 		if s[i] == s[i-1] {
 			count++
 		} else {
 			if count > 1 {
-				result += string(byte('0' + count))
+				result.WriteString(string(byte('0' + count)))
 			}
-			result += string(s[i])
+			result.WriteString(string(s[i]))
 			count = 1
 		}
 	}
 	if count > 1 {
-		result += string(byte('0' + count))
+		result.WriteString(string(byte('0' + count)))
 	}
-	return result
+	return result.String()
 }
